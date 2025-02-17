@@ -1,4 +1,5 @@
 import "./globals.css";
+import Providers from "@/app/providers";
 
 export default function RootLayout({
   children,
@@ -7,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-screen">
-      <body className="h-full w-full">{children}</body>
+      <body className="h-full w-full">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

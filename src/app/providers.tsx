@@ -1,19 +1,22 @@
 "use client";
 import { http } from "viem";
 import { BiconomyProvider } from "@biconomy/use-aa";
-import { polygonAmoy } from "viem/chains";
+import { mantle } from "viem/chains";
 import { WagmiProvider, createConfig } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const biconomyPaymasterApiKey =
-    process.env.NEXT_PUBLIC_PAYMASTER_API_KEY || "";
-  const bundlerUrl = process.env.NEXT_PUBLIC_BUNDLER_URL || "";
+    process.env.NEXT_PUBLIC_PAYMASTER_API_KEY ||
+    "rFvBQsfza.4ffbe2ab-b78f-4711-8dbb-b6736fdecf57";
+  const bundlerUrl =
+    process.env.NEXT_PUBLIC_BUNDLER_URL ||
+    "https://bundler.biconomy.io/api/v2/5000/0194855f-ce70-7a69-9e45-3a0d4b5ad6b2";
 
   const config = createConfig({
-    chains: [polygonAmoy],
+    chains: [mantle],
     transports: {
-      [polygonAmoy.id]: http(),
+      [mantle.id]: http(),
     },
   });
 
@@ -26,7 +29,6 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           config={{
             biconomyPaymasterApiKey,
             bundlerUrl,
-            // Add your signer here if you don't want to use the metamask signer
           }}
           queryClient={queryClient}
         >
